@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Ga Bible</string>
+    <string name="menu">Menu</string>
+    <string name="font_size">Font Size</string>
+    <string name="light_dark_mode">Theme</string>
+    <string name="about">About</string>
+    <string name="one">1</string>
+    <string name="genesis">Genesis</string>
+    <string name="select_book">Select Book</string>
+    <string name="old_testament">Old Testament</string>
+    <string name="new_testament">New Testament</string>
+    <string name="select_verse">Select Verse</string>
 </resources>

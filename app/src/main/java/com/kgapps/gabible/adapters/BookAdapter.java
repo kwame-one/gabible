@@ -1,9 +1,11 @@
 package com.kgapps.gabible.adapters;
 
 import android.app.Application;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,6 +18,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import javax.inject.Inject;
 
@@ -24,10 +27,12 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
     private ItemClickListener itemClickListener;
     private final Application application;
     private List<Book> books;
+    private final Random random;
 
     @Inject
-    public BookAdapter(Application application) {
+    public BookAdapter(Application application, Random random) {
         this.application = application;
+        this.random = random;
 
         books = new ArrayList<>();
     }
@@ -42,6 +47,10 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         notifyDataSetChanged();
     }
 
+    public List<Book> getBooks() {
+        return books;
+    }
+
     @NonNull
     @NotNull
     @Override
@@ -51,6 +60,10 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull @NotNull BookViewHolder holder, int position) {
+        Book book = books.get(position);
+
+        holder.book.setText(book.name);
+        holder.book.setTextColor(Color.argb(255, random.nextInt(256), random.nextInt(256), random.nextInt(256)));
 
     }
 
@@ -61,8 +74,12 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 
     class BookViewHolder extends RecyclerView.ViewHolder {
 
+        private TextView book;
+
         public BookViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
+
+            book = itemView.findViewById(R.id.book);
 
             itemView.setOnClickListener(v -> {
                 itemClickListener.onItemClick(v, getAdapterPosition());

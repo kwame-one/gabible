@@ -10,4 +10,5 @@
     <string name="old_testament">Old Testament</string>
     <string name="new_testament">New Testament</string>
     <string name="select_verse">Select Verse</string>
+    <string name="select_chapter">Select Chapter</string>
 </resources>

@@ -6,5 +6,5 @@
     android:textAlignment="center"
     xmlns:tools="http://schemas.android.com/tools"
     tools:text="Gen"
-    android:id="@+id/book"
+    android:id="@+id/chapter"
     android:textSize="@dimen/font_normal"/>

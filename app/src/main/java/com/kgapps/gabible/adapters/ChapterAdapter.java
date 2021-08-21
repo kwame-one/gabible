@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.kgapps.gabible.R;
+import com.kgapps.gabible.architecture.models.Chapter;
 import com.kgapps.gabible.architecture.models.Verse;
 import com.kgapps.gabible.listeners.ItemClickListener;
 
@@ -22,67 +23,69 @@ import java.util.Random;
 
 import javax.inject.Inject;
 
-public class VerseAdapter  extends RecyclerView.Adapter<VerseAdapter.VerseViewHolder> {
+public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ChapterViewHolder> {
 
     private final Application application;
-    private List<Verse> verses;
+    private List<Chapter> chapters;
     private ItemClickListener itemClickListener;
     private final Random random;
 
     @Inject
-    public VerseAdapter(Application application, Random random) {
+    public ChapterAdapter(Application application, Random random) {
         this.application = application;
         this.random = random;
-        verses = new ArrayList<>();
+        chapters = new ArrayList<>();
     }
 
     public void setItemClickListener(ItemClickListener itemClickListener) {
         this.itemClickListener = itemClickListener;
     }
 
-    public void setVerses(List<Verse> verses) {
-        this.verses.clear();
-        this.verses.addAll(verses);
+    public void setChapters(List<Chapter> chapters) {
+        this.chapters.clear();
+        this.chapters.addAll(chapters);
         notifyDataSetChanged();
     }
 
-    public List<Verse> getVerses() {
-        return verses;
+    public List<Chapter> getChapters() {
+        return chapters;
     }
 
     @NonNull
     @NotNull
     @Override
-    public VerseViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-        return new VerseViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_row_verse, parent, false));
+    public ChapterViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
+        return new ChapterViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_row_chapter, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull @NotNull VerseViewHolder  holder, int position) {
-        Verse verse = verses.get(position);
+    public void onBindViewHolder(@NonNull @NotNull ChapterViewHolder holder, int position) {
+        Chapter chapter = chapters.get(position);
 
-        holder.verse.setText(verse.verse);
-        holder.verse.setTextColor(Color.argb(255, random.nextInt(256), random.nextInt(256), random.nextInt(256)));
+        holder.chapter.setText(chapter.chapter);
+
+        holder.chapter.setTextColor(Color.argb(255, random.nextInt(256), random.nextInt(256), random.nextInt(256)));
 
     }
 
     @Override
     public int getItemCount() {
-        return verses.size();
+        return chapters.size();
     }
 
-    class VerseViewHolder extends RecyclerView.ViewHolder {
+    class ChapterViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView verse;
+        private TextView chapter;
 
-        public VerseViewHolder(@NonNull @NotNull View itemView) {
+        public ChapterViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
 
-            verse = itemView.findViewById(R.id.verse);
+            chapter = itemView.findViewById(R.id.chapter);
 
             itemView.setOnClickListener(v -> {
                 itemClickListener.onItemClick(v, getAdapterPosition());
             });
+
         }
     }
 }
